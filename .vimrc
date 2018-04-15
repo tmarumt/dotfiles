@@ -361,7 +361,7 @@ if s:plug.is_installed('denite.nvim')
   " search
   nnoremap <silent> [denite]l :<C-u>Denite line<CR>
   " resume previous buffer
-  nnoremap <silent> [denite]p :<C-u>Denite -resume -mode=normal<CR>
+  nnoremap <silent> [denite]p :<C-u>Denite -resume<CR>
   " yank history
   nnoremap <silent> [denite]y :<C-u>Denite -mode=normal neoyank<CR>
   " execute command

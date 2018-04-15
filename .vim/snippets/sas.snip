@@ -43,11 +43,18 @@ options     head
 snippet     srt
 abbr        proc sort data = ...
 options     head
+  proc sort data = ${1:inds} presorted${2: nodupkey};
+    by ${0:key};
+  run;
+
+snippet     sou
+abbr        proc sort data = ... out = ...
+options     head
   proc sort data = ${1:inds} presorted${2: nodupkey} out = ${3:outds};
     by ${0:key};
   run;
 
-snippet     sby
+snippet     sor
 abbr        proc sort; by ...
 options     head
   proc sort presorted; by ${0:key};
@@ -77,12 +84,12 @@ options     head
     endsubmit;
   run;
 
-snippet     mcr
+snippet     mac
 abbr        %macro ...; ...; %mend;
 options     head
   %macro ${1:name}(${2:#:args});
     ${0}
-  %mend ${1:name};
+  %mend;
 
 snippet     mif
 abbr        %if ... %then %do; ... %end;

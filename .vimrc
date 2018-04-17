@@ -384,7 +384,7 @@ if s:plug.is_installed('context_filetype.vim')
   let g:context_filetype#filetypes = {
         \ 'sas' : [
         \   {
-        \     'start' : '^\s*proc\s\+lua\s*\w*;\_s*submit\s\+.*;',
+        \     'start' : '^\s*proc\s\+lua\s*\w*;\_s*submit\s*.*;',
         \     'end' : '^\s*endsubmit\s*;\_s*run\s*;',
         \     'filetype' : 'lua',
         \   }

@@ -61,6 +61,8 @@ Plug 'bronson/vim-trailing-whitespace'
 Plug 'Shougo/junkfile.vim'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-lua-ftplugin'
+Plug 'Shougo/context_filetype.vim'
+Plug 'osyo-manga/vim-precious'
 
 call plug#end()
 
@@ -377,14 +379,44 @@ if s:plug.is_installed('denite.nvim')
   endif
 endif
 
-if s:plug.is_installed('vim-misc') || s:plug.is_installed('vim-lua-ftplugin')
+"-------------------- change filetype depending context --------------------
+if s:plug.is_installed('context_filetype.vim')
+  let g:context_filetype#filetypes = {
+        \ 'sas' : [
+        \   {
+        \     'start' : '^\s*proc\s\+lua\s*\w*;\_s*submit\s\+.*;',
+        \     'end' : '^\s*endsubmit\s*;\_s*run\s*;',
+        \     'filetype' : 'lua',
+        \   }
+        \ ],
+        \}
+endif
+
+if s:plug.is_installed('vim-precious')
+  " don't change filetype when cursor move
+  let g:precious_enable_switch_CursorMoved = {
+        \"*" : 0
+        \}
+  let g:precious_enable_switch_CursorMoved_i = {
+        \"*" : 0
+        \}
+
+  " on (change filetype automatically) when insert-mode, off when normal-mode
+  augroup test
+    autocmd!
+    autocmd InsertEnter * :PreciousSwitch
+    autocmd InsertLeave * :PreciousReset
+  augroup END
+endif
+
+"-------------------- auto-complete --------------------
+if s:plug.is_installed('vim-misc') && s:plug.is_installed('vim-lua-ftplugin')
   let g:lua_check_syntax = 0
   let g:lua_complete_omni = 1
   let g:lua_complete_dynamic = 0
   let g:lua_define_completion_mappings = 0
 endif
 
-"-------------------- auto-complete --------------------
 if s:plug.is_installed('deoplete.nvim')
   if IsWindows()
     let g:python3_host_prog=expand("C:\\Applications\\Python\\Python35\\python.exe")
@@ -395,7 +427,7 @@ if s:plug.is_installed('deoplete.nvim')
   " Use smartcase.
   let g:deoplete#enable_smart_case = 1
 
-  if s:plug.is_installed('vim-misc') || s:plug.is_installed('vim-lua-ftplugin')
+  if s:plug.is_installed('vim-misc') && s:plug.is_installed('vim-lua-ftplugin')
     call deoplete#custom#source('omni', 'functions', {
           \ 'lua': 'xolox#lua#omnifunc',
           \ })

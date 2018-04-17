@@ -59,6 +59,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'lfilho/cosco.vim'
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'Shougo/junkfile.vim'
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-lua-ftplugin'
 
 call plug#end()
 
@@ -375,6 +377,13 @@ if s:plug.is_installed('denite.nvim')
   endif
 endif
 
+if s:plug.is_installed('vim-misc') || s:plug.is_installed('vim-lua-ftplugin')
+  let g:lua_check_syntax = 0
+  let g:lua_complete_omni = 1
+  let g:lua_complete_dynamic = 0
+  let g:lua_define_completion_mappings = 0
+endif
+
 "-------------------- auto-complete --------------------
 if s:plug.is_installed('deoplete.nvim')
   if IsWindows()
@@ -385,6 +394,12 @@ if s:plug.is_installed('deoplete.nvim')
   let g:deoplete#enable_at_startup = 1
   " Use smartcase.
   let g:deoplete#enable_smart_case = 1
+
+  if s:plug.is_installed('vim-misc') || s:plug.is_installed('vim-lua-ftplugin')
+    call deoplete#custom#source('omni', 'functions', {
+          \ 'lua': 'xolox#lua#omnifunc',
+          \ })
+  endif
 
   " <C-h>, <BS>: close popup and delete backword char.
   inoremap <expr><C-h> deoplete#smart_close_popup()."\<C-h>"

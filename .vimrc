@@ -392,23 +392,6 @@ if s:plug.is_installed('context_filetype.vim')
         \}
 endif
 
-if s:plug.is_installed('vim-precious')
-  " don't change filetype when cursor move
-  let g:precious_enable_switch_CursorMoved = {
-        \"*" : 0
-        \}
-  let g:precious_enable_switch_CursorMoved_i = {
-        \"*" : 0
-        \}
-
-  " on (change filetype automatically) when insert-mode, off when normal-mode
-  augroup test
-    autocmd!
-    autocmd InsertEnter * :PreciousSwitch
-    autocmd InsertLeave * :PreciousReset
-  augroup END
-endif
-
 "-------------------- auto-complete --------------------
 if s:plug.is_installed('vim-misc') && s:plug.is_installed('vim-lua-ftplugin')
   let g:lua_check_syntax = 0

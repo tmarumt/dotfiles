@@ -1,71 +1,78 @@
 snippet     dat
-abbr        data ... run;
+abbr        data ...; ...; run;
 options     head
   data ${1:name};
     ${0}
   run;
 
 snippet     if
-abbr        if ... then do; ... end;
+abbr        if ... then do; ...; end;
 options     word
   if ${1:#:condition} then do;
     ${0}
   end;
 
 snippet     elif
-abbr        else if ... then do; ... end;
+abbr        else if ... then do; ...; end;
 options     word
   else if ${1:#:condition} then do;
     ${0}
   end;
 
 snippet     els
-abbr        else do; ... end;
+abbr        else do; ...; end;
 options     word
   else do;
     ${0}
   end;
 
 snippet     do
-abbr        do ...; ...; ... end;
+abbr        do ...; ...; end;
 options     word
   do ${1:i = 1} to ${2:10};
     ${0}
   end;
 
 snippet     frq
-abbr        proc freq data = ...
+abbr        proc freq data=...
 options     head
-  proc freq data = ${1:inds};
-    tables ${0:cat};
+  proc freq data=${1:inds};
+    tables ${0:#:cat};
   run;
 
 snippet     srt
-abbr        proc sort data = ...
+abbr        proc sort data=...
 options     head
-  proc sort data = ${1:inds} presorted${2: nodupkey};
-    by ${0:key};
+  proc sort data=${1:inds} presorted;
+    by ${0:#:key};
   run;
 
 snippet     sou
-abbr        proc sort data = ... out = ...
+abbr        proc sort data=... out=...
 options     head
-  proc sort data = ${1:inds} presorted${2: nodupkey} out = ${3:outds};
-    by ${0:key};
+  proc sort data=${1:inds} out=${3:outds} presorted;
+    by ${0:#:key};
   run;
 
 snippet     sor
 abbr        proc sort; by ...
 options     head
-  proc sort presorted; by ${0:key};
+  proc sort presorted; by ${0:#:key};
+
+snippet     ndk
+abbr        proc sort data=... out=... nodupkey;
+options     head
+  proc sort data=${1:inds} out=${3:outds} nodupkey;
+    by ${0:#:key};
+  run;
 
 snippet     trs
-abbr        proc transpose data = ...
+abbr        proc transpose data=...
 options     head
-  proc transpose data = ${1:inds} out = ${2:outds} prefix=${3:prf};
-    var ${4:var};
-    by ${5:key};
-    id ${0:id};
+  proc transpose data=${1:inds} out=${2:outds} prefix=${3:prf};
+    var ${4:#:var};
+    by ${5:#:key};
+    id ${0:#:id};
   run;
 
 snippet     sql
@@ -76,10 +83,10 @@ options     head
   quit;
 
 snippet     lua
-abbr        proc lua; ...
+abbr        proc lua ...
 options     head
-  proc lua${1:#: option};
-    submit;
+  proc lua${1: restart};
+    submit${2:#: option};
     ${0}
     endsubmit;
   run;
@@ -92,28 +99,28 @@ options     head
   %mend;
 
 snippet     mif
-abbr        %if ... %then %do; ... %end;
+abbr        %if ... %then %do; ...; %end;
 options     word
   %if ${1:#:condition} %then %do;
     ${0}
   %end;
 
 snippet     melif
-abbr        %else %if ... %then %do; ... %end;
+abbr        %else %if ... %then %do; ...; %end;
 options     word
   %else %if ${1:#:condition} %then %do;
     ${0}
   %end;
 
 snippet     mels
-abbr        %else %do; ... %end;
+abbr        %else %do; ...; %end;
 options     word
   %else %do;
     ${0}
   %end;
 
 snippet     mdo
-abbr        %do ...; ...; ... %end;
+abbr        %do ...; ...; %end;
 options     word
   %do ${1:i = 1} %to ${2:10};
     ${0}

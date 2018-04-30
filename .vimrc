@@ -63,6 +63,7 @@ Plug 'xolox/vim-misc'
 Plug 'xolox/vim-lua-ftplugin'
 Plug 'Shougo/context_filetype.vim'
 Plug 'osyo-manga/vim-precious'
+Plug 'chrisbra/vim-diff-enhanced'
 
 call plug#end()
 

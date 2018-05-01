@@ -494,11 +494,6 @@ if s:plug.is_installed('vim-easy-align')
   nmap ga <Plug>(EasyAlign)
 endif
 
-"-------------------- Enhanced diff plugin --------------------
-if s:plug.is_installed('vim-diff-enhanced') && executable('git')
-  packadd! vim-diff-enhanced
-endif
-
 if s:plug.is_installed('linediff.vim')
   let g:linediff_first_buffer_command  = 'leftabove new'
   let g:linediff_second_buffer_command = 'rightbelow vertical new'

@@ -317,32 +317,36 @@ let g:netrw_alto = 1
 
 "-------------------- jump to selected position --------------------
 if s:plug.is_installed('denite.nvim')
-  " Change file_rec command.
+  " Change file/rec command.
   if executable('rg')
-    call denite#custom#var('file_rec', 'command', ['rg', '--files', '--glob', '!.git'])
+    " For ripgrep
+    " Note: It is slower than ag
+    call denite#custom#var('file/rec', 'command',
+          \ ['rg', '--files', '--glob', '!.git'])
   elseif executable('pt')
     " For Pt(the platinum searcher)
     " NOTE: It also supports windows.
-    call denite#custom#var('file_rec', 'command',
+    call denite#custom#var('file/rec', 'command',
           \ ['pt', '--follow', '--nocolor', '--nogroup',
           \  (has('win32') ? '-g:' : '-g='), ''])
   endif
 
-  " Change matchers.
-  " call denite#custom#source('file_mru', 'matchers', ['matcher_fuzzy', 'matcher_project_files'])
-  " call denite#custom#source('file_rec', 'matchers', ['matcher_cpsm'])
   " Change sorters.
-  " call denite#custom#source('file_rec', 'sorters', ['sorter_sublime'])
+  call denite#custom#source(
+        \ 'file/rec', 'sorters', ['sorter/sublime'])
 
-  " grep source
+  " Change grep source
   if executable('rg')
+    " Ripgrep command on grep source
     call denite#custom#var('grep', 'command', ['rg'])
-    call denite#custom#var('grep', 'default_opts', ['--vimgrep', '--no-heading'])
+    call denite#custom#var('grep', 'default_opts',
+          \ ['--vimgrep', '--no-heading'])
     call denite#custom#var('grep', 'recursive_opts', [])
     call denite#custom#var('grep', 'pattern_opt', ['--regexp'])
     call denite#custom#var('grep', 'separator', ['--'])
     call denite#custom#var('grep', 'final_opts', [])
   elseif executable('pt')
+    " Pt command on grep source
     call denite#custom#var('grep', 'command', ['pt'])
     call denite#custom#var('grep', 'default_opts',
           \ ['--nogroup', '--nocolor', '--smart-case'])
@@ -371,12 +375,22 @@ if s:plug.is_installed('denite.nvim')
   nnoremap <silent> [denite]y :<C-u>Denite -mode=normal neoyank<CR>
   " execute command
   nnoremap <silent> [denite]c :<C-u>Denite command<CR>
+  nnoremap <silent> [denite]h :<C-u>Denite -mode=normal command_history<CR>
 
   if executable('rg') || executable('pt')
     " grep keyword under cursor
     nnoremap <silent> [denite]j :<C-u>DeniteCursorWord -mode=normal grep line<CR>
     " grep
     nnoremap <silent> [denite]g :<C-u>Denite -mode=normal grep<CR>
+  endif
+endif
+
+"-------------------- open and create temporary file --------------------
+if s:plug.is_installed('junkfile.vim')
+  let g:junkfile#directory = expand('~/.junk')
+
+  if s:plug.is_installed('denite.nvim')
+    nnoremap <silent> [denite]k :<C-u>Denite -mode=normal junkfile<CR>
   endif
 endif
 
@@ -531,8 +545,4 @@ endif
 if s:plug.is_installed('vim-trailing-whitespace')
   let g:extra_whitespace_ignored_filetypes = ['denite', 'mkd']
   autocmd BufWritePre * :FixWhitespace
-endif
-
-if s:plug.is_installed('junkfile.vim')
-  let g:junkfile#directory = expand('~/.junk')
 endif

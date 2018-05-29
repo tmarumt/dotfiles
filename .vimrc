@@ -64,6 +64,7 @@ Plug 'xolox/vim-lua-ftplugin'
 Plug 'Shougo/context_filetype.vim'
 Plug 'osyo-manga/vim-precious'
 Plug 'chrisbra/vim-diff-enhanced'
+Plug 'will133/vim-dirdiff'
 
 call plug#end()
 
@@ -420,6 +421,7 @@ if s:plug.is_installed('deoplete.nvim')
     let g:python3_host_prog=expand("C:\\Applications\\Python\\Python35\\python.exe")
   endif
 
+
   " Use deoplete.
   let g:deoplete#enable_at_startup = 1
   " Use smartcase.
@@ -545,4 +547,12 @@ endif
 if s:plug.is_installed('vim-trailing-whitespace')
   let g:extra_whitespace_ignored_filetypes = ['denite', 'mkd']
   autocmd BufWritePre * :FixWhitespace
+endif
+
+if s:plug.is_installed('vim-dirdiff')
+  let g:DirDiffEnableMappings = 0
+  let g:DirDiffExcludes = "CVS,*.class,*.exe,.*.swp"
+  let g:DirDiffIgnore = "Id:,Revision:,Date:"
+  " ignore white space in diff
+  let g:DirDiffAddArgs = "-w"
 endif

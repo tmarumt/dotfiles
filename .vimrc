@@ -166,7 +166,7 @@ augroup END
 set completeopt=menuone
 
 "-------------------- diff --------------------
-set diffopt=filler,iwhite,vertical
+set diffopt=filler,vertical
 " when diff mode, wrap on and spell-check off
 function! SetDiffMode()
   if &diff

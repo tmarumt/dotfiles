@@ -39,7 +39,8 @@ Plug 'tpope/vim-surround'
 Plug 'junegunn/vim-easy-align'
 Plug 'easymotion/vim-easymotion'
 Plug 'terryma/vim-multiple-cursors'
-Plug 'tpope/vim-commentary'
+" Plug 'tpope/vim-commentary'
+Plug 'scrooloose/nerdcommenter'
 Plug 'Shougo/denite.nvim'
 Plug 'Shougo/neomru.vim'
 Plug 'Shougo/neoyank.vim'
@@ -534,6 +535,26 @@ if s:plug.is_installed('vim-multiple-cursors')
       let g:deoplete#disable_auto_complete = 0
     endfunction
   endif
+endif
+
+"-------------------- nerdcommenter --------------------
+if s:plug.is_installed('nerdcommenter')
+  " Add spaces after comment delimiters by default
+  let g:NERDSpaceDelims = 1
+  " Use compact syntax for prettified multi-line comments
+  let g:NERDCompactSexyComs = 1
+  " Align line-wise comment delimiters flush left instead of following code indentation
+  let g:NERDDefaultAlign = 'left'
+  " Set a language to use its alternate delimiters by default
+  let g:NERDAltDelims_java = 1
+  " Add your own custom formats or override the defaults
+  " let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
+  " Allow commenting and inverting empty lines (useful when commenting a region)
+  let g:NERDCommentEmptyLines = 1
+  " Enable trimming of trailing whitespace when uncommenting
+  let g:NERDTrimTrailingWhitespace = 1
+  " Enable NERDCommenterToggle to check all selected lines is commented or not
+  let g:NERDToggleCheckAllLines = 1
 endif
 
 "-------------------- cosco.vim --------------------

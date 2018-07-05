@@ -368,22 +368,22 @@ if s:plug.is_installed('denite.nvim')
   nnoremap <silent> [denite]d :<C-u>Denite directory_rec<CR>
   nnoremap <silent> [denite]n :<C-u>Denite directory_mru<CR>
   " select buffer
-  nnoremap <silent> [denite]b :<C-u>Denite -mode=normal buffer<CR>
+  nnoremap <silent> [denite]b :<C-u>Denite buffer<CR>
   " search
   nnoremap <silent> [denite]l :<C-u>Denite line<CR>
   " resume previous buffer
   nnoremap <silent> [denite]p :<C-u>Denite -resume<CR>
   " yank history
-  nnoremap <silent> [denite]y :<C-u>Denite -mode=normal neoyank<CR>
+  nnoremap <silent> [denite]y :<C-u>Denite neoyank<CR>
   " execute command
   nnoremap <silent> [denite]c :<C-u>Denite command<CR>
-  nnoremap <silent> [denite]h :<C-u>Denite -mode=normal command_history<CR>
+  nnoremap <silent> [denite]h :<C-u>Denite command_history<CR>
 
   if executable('rg') || executable('pt')
     " grep keyword under cursor
-    nnoremap <silent> [denite]j :<C-u>DeniteCursorWord -mode=normal grep line<CR>
+    nnoremap <silent> [denite]j :<C-u>DeniteCursorWord grep line<CR>
     " grep
-    nnoremap <silent> [denite]g :<C-u>Denite -mode=normal grep<CR>
+    nnoremap <silent> [denite]g :<C-u>Denite grep<CR>
   endif
 endif
 
@@ -392,7 +392,7 @@ if s:plug.is_installed('junkfile.vim')
   let g:junkfile#directory = expand('~/.junk')
 
   if s:plug.is_installed('denite.nvim')
-    nnoremap <silent> [denite]k :<C-u>Denite -mode=normal junkfile<CR>
+    nnoremap <silent> [denite]k :<C-u>Denite junkfile<CR>
   endif
 endif
 
@@ -421,7 +421,6 @@ if s:plug.is_installed('deoplete.nvim')
   if IsWindows()
     let g:python3_host_prog=expand("C:\\Applications\\Python\\Python35\\python.exe")
   endif
-
 
   " Use deoplete.
   let g:deoplete#enable_at_startup = 1

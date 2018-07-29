@@ -66,6 +66,7 @@ Plug 'Shougo/context_filetype.vim'
 Plug 'osyo-manga/vim-precious'
 Plug 'chrisbra/vim-diff-enhanced'
 Plug 'will133/vim-dirdiff'
+Plug 'dbeniamine/todo.txt-vim'
 
 call plug#end()
 
@@ -575,4 +576,16 @@ if s:plug.is_installed('vim-dirdiff')
   let g:DirDiffIgnore = "Id:,Revision:,Date:"
   " ignore white space in diff
   let g:DirDiffAddArgs = "-w"
+endif
+
+"-------------------- todo.txt --------------------
+if s:plug.is_installed('todo.txt-vim')
+  " Use todo#Complete as the omni complete function for todo files
+  au filetype todo setlocal omnifunc=todo#Complete
+  " set all default mappings off
+  " let g:Todo_txt_do_not_map = 1
+  " set the place of cursor after sorting
+  " let g:TodoTxtSortDueDateCursorPos = "top"
+  " create date (today) prefixed on new lines
+  " let g:Todo_txt_prefix_creation_date = 1
 endif

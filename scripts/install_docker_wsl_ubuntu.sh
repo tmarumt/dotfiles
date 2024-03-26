@@ -22,10 +22,10 @@ sudo apt-get update && sudo apt-get install -y \
 
 sudo usermod -aG docker $USER
 
-sudo tee /etc/docker/daemon.json << EOL > /dev/null
+sudo tee /etc/docker/daemon.json << EOS > /dev/null
 {
   "ip": "127.0.0.1"
 }
-EOL
+EOS
 
 sudo systemctl enable --now docker
